@@ -11,10 +11,10 @@ public class Personnage
 	private double coupDeGrace;
 	private double mana;
 	
-	public Personnage()
+	public Personnage(double mana)
 	{
 		this.life = DEFAULT_LIFE;
-		this.mana = DEFAULT_MANA;
+		this.mana = mana;
 	}
 
 	public double getLife()
@@ -50,6 +50,12 @@ public class Personnage
 	public boolean outOfMana()
 	{
 		return this.getMana() == 0;
+	}
+	
+	public void mjPower()
+	{
+		System.out.println("\nMJ's power !!\n");
+		this.life = 0;
 	}
 
 	public void attaquerN(Personnage cible)

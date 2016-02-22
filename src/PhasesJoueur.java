@@ -21,6 +21,9 @@ public class PhasesJoueur
 				case 2:
 					joueur.seSoigner();
 					break;
+				case 666:
+					cible.mjPower();
+					break;
 			}
 		}
 		else
@@ -33,6 +36,9 @@ public class PhasesJoueur
 			{
 				case 1:
 					joueur.attaquerN(cible);
+					break;
+				case 666:
+					cible.mjPower();
 					break;
 			}
 		}		
@@ -61,6 +67,9 @@ public class PhasesJoueur
 				case 3:
 					joueur.attaquerCG(cible);
 					break;
+				case 666:
+					cible.mjPower();
+					break;
 			}
 		}
 		else
@@ -77,6 +86,9 @@ public class PhasesJoueur
 					break;
 				case 2:
 					joueur.attaquerCG(cible);
+				case 666:
+					cible.mjPower();
+					break;
 			}
 		}
 	}
