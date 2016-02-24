@@ -38,6 +38,7 @@ public class Main
 			{
 				case 1:
 					rejouer = true;
+					joueur.avoirUnLoot();
 					joueur = new Personnage(joueur.getMana());
 					cpu = new Personnage(joueur.getMana());
 					break;

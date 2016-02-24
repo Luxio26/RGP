@@ -41,7 +41,7 @@ public class Personnage
 	{
 		return this.mana;
 	}
-
+	
 	public boolean isDead()
 	{
 		return this.life == 0;
@@ -113,5 +113,13 @@ public class Personnage
 		
 		if(this.life > LIFE_LIMIT)
 			this.life = LIFE_LIMIT;
+	}
+	
+	public void avoirUnLoot()
+	{
+		this.mana += Loot.randomLoot();
+		
+		if(this.mana > DEFAULT_MANA)
+			this.mana = DEFAULT_MANA;
 	}
 }
