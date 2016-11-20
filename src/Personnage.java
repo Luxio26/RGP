@@ -2,7 +2,7 @@ public class Personnage
 {
 	public static final double DEFAULT_MANA = 5.0;
 	public static final double DEFAULT_LIFE = 50.0;
-	public static final double HALF_LIFE = 25.0;
+	public static final double HALF_LIFE = Math.floor(DEFAULT_LIFE/2);
 	public static final double LIFE_LIMIT = 55.0;
 	
 	private double life;
