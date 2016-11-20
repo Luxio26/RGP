@@ -49,7 +49,7 @@ public class Personnage
 	
 	public boolean outOfMana()
 	{
-		return this.getMana() == 0;
+		return this.mana == 0;
 	}
 	
 	public void mjPower()
@@ -60,7 +60,7 @@ public class Personnage
 
 	public void attaquerN(Personnage cible)
 	{
-		if(cible.life == 0)
+		if(cible.isDead())
 			return;
 		
 		this.attaque = Math.floor(Math.random()*10 + 1);
@@ -79,7 +79,7 @@ public class Personnage
 	
 	public void attaquerCG(Personnage cible)
 	{
-		if(cible.life == 0)
+		if(cible.isDead())
 			return;
 		
 		this.coupDeGrace = Math.floor(Math.random()*11 + 9);
@@ -98,12 +98,10 @@ public class Personnage
 	
 	public void seSoigner()
 	{
-		if(this.life == 0 || this.mana == 0)
+		if(this.isDead() || this.outOfMana())
 			return;
 		
 		this.mana -= 1;
-		if(this.mana < 0)
-			this.mana = 0;
 		
 		double soins;
 		soins = Math.floor(Math.random()*10 + 10);
