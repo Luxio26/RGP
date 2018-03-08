@@ -2,116 +2,43 @@ import java.util.Scanner;
 
 public class PhasesJoueur
 {
-	private static void choixSup(Personnage joueur, Personnage cible, Scanner choixJoueur)
-	{
+	private static void choix(Personnage joueur, Personnage cible, Scanner choixJoueur) {
 		int choix;
+		boolean loop;
 		
-		if(!joueur.outOfMana())
-		{
+		do {
+			loop = false;
+			
 			System.out.println("Que voulez-vous faire ?");
 			System.out.println("1.Attaquer");
-			System.out.println("2.Soins ("+joueur.getMana()+" restants)");
+			if(! joueur.outOfMana()) System.out.println("2.Soins ("+joueur.getMana()+" restants)");
+			if(joueur.getLife() <= Personnage.HALF_LIFE) System.out.println("3.Coup de grace");
 			choix = choixJoueur.nextInt();
 			
 			switch(choix)
 			{
 				case 1:
-					joueur.attaquerN(cible);
+					joueur.attaquer(cible, false);
 					break;
 				case 2:
-					joueur.seSoigner();
-					break;
-				case 666:
-					cible.mjPower();
-					break;
-			}
-		}
-		else
-		{
-			System.out.println("Que voulez-vous faire ?");
-			System.out.println("1.Attaquer");
-			choix = choixJoueur.nextInt();
-			
-			switch(choix)
-			{
-				case 1:
-					joueur.attaquerN(cible);
-					break;
-				case 666:
-					cible.mjPower();
-					break;
-			}
-		}		
-	}
-	
-	private static void choixInf(Personnage joueur, Personnage cible, Scanner choixJoueur)
-	{
-		int choix;
-		
-		if(!joueur.outOfMana())
-		{
-			System.out.println("Que voulez-vous faire ?");
-			System.out.println("1.Attaquer");
-			System.out.println("2.Soins ("+joueur.getMana()+" restants)");
-			System.out.println("3.Coup de grâce");
-			choix = choixJoueur.nextInt();
-			
-			switch(choix)
-			{
-				case 1:
-					joueur.attaquerN(cible);
-					break;
-				case 2:
-					joueur.seSoigner();
+					if(joueur.outOfMana()) loop = true;
+					else joueur.seSoigner();
 					break;
 				case 3:
-					joueur.attaquerCG(cible);
+					if(joueur.getLife() > Personnage.HALF_LIFE) loop = true;
+					else joueur.attaquer(cible, true);
 					break;
 				case 666:
 					cible.mjPower();
 					break;
-			}
-		}
-		else
-		{
-			System.out.println("Que voulez-vous faire ?");
-			System.out.println("1.Attaquer");
-			System.out.println("2.Coup de grâce");
-			choix = choixJoueur.nextInt();
-			
-			switch(choix)
-			{
-				case 1:
-					joueur.attaquerN(cible);
-					break;
-				case 2:
-					joueur.attaquerCG(cible);
-				case 666:
-					cible.mjPower();
+				default:
+					loop = true;
 					break;
 			}
-		}
+		} while(loop);
 	}
 	
-	/**
-	 * it suppose that a.getLife() > Personnage.HALF_LIFE
-	 * @param a
-	 * @param b
-	 * @param scannerJoueur
-	 */
-	public static void moitieSupérieure(Personnage a, Personnage b, Scanner scannerJoueur)
-	{
-		PhasesJoueur.choixSup(a, b, scannerJoueur);
-	}
-	
-	/**
-	 * it suppose that a.getLife() <= Personnage.HALF_LIFE
-	 * @param a
-	 * @param b
-	 * @param scannerJoueur
-	 */
-	public static void moitieInferieure(Personnage a, Personnage b, Scanner scannerJoueur)
-	{
-		PhasesJoueur.choixInf(a, b, scannerJoueur);
+	public static void jouer(Personnage a, Personnage b, Scanner scanner) {
+		choix(a, b, scanner);
 	}
 }

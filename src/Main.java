@@ -2,28 +2,23 @@ import java.util.Scanner;
 
 public class Main
 {
+	// TODO: Mode extrême --> Si le personnage rejoue, sa vie n'est pas reset : il garde la même quoi... faut pas être con dans la vie PUTAIN !!
+	// TODO: Ajouter une fonctionnalité limitant le nombre de coup de grâce utilisable
+	
 	public static void main(String[] args)
 	{
 		boolean rejouer = false;
 		Scanner saisieUtilisateur = new Scanner(System.in);
 		Personnage joueur = new Personnage(Personnage.DEFAULT_MANA);
 		Personnage cpu = new Personnage(Personnage.DEFAULT_MANA);
-		do
-		{
-			do
-			{
+		do {
+			do {
 				System.out.println("Vous : "+joueur.getLife()+"\tCpu : "+cpu.getLife()+"\n");
+				
 				// Player turn
-				if(joueur.getLife() > Personnage.HALF_LIFE)
-					PhasesJoueur.moitieSupÃ©rieure(joueur, cpu, saisieUtilisateur);
-				else
-					PhasesJoueur.moitieInferieure(joueur, cpu, saisieUtilisateur);
-
+				PhasesJoueur.jouer(joueur, cpu, saisieUtilisateur);
 				// Cpu turn
-				if(cpu.getLife() > Personnage.HALF_LIFE)
-					PhasesCPU.moitieSuperieure(cpu, joueur);
-				else
-					PhasesCPU.moitieInferieure(cpu, joueur);
+				PhasesCPU.jouer(cpu, joueur);
 			}while(!joueur.isDead() && !cpu.isDead());
 
 			System.out.println("joueur est mort : "+joueur.isDead());
@@ -47,7 +42,7 @@ public class Main
 					rejouer = false;
 					break;
 			}
-		}while(rejouer);
+		} while(rejouer);
 		saisieUtilisateur.close();
 	}
 }

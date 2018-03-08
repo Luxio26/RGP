@@ -1,28 +1,16 @@
 public class PhasesCPU
 {
-	/**
-	 * It suppose that cpu.getLife() > Personnage.HALF_LIFE
-	 * @param cpu
-	 * @param cible
-	 */
-	public static void moitieSuperieure(Personnage cpu, Personnage cible)
-	{
-		cpu.attaquerN(cible);
-	}
-	
-	/**
-	 * It suppose that cpu.getLife() <= Personnage.HALF_LIFE
-	 * @param cpu
-	 * @param cible
-	 */
-	public static void moitieInferieure(Personnage cpu, Personnage cible)
-	{
-		double choixCpu = Math.floor(Math.random()*4);
-		
-		if(choixCpu == 0)
-			cpu.seSoigner();
-		else
-			cpu.attaquerN(cible);
-		
+	public static void jouer(Personnage cpu, Personnage joueur) {
+		if(cpu.getLife() > Personnage.HALF_LIFE) {
+			cpu.attaquer(cpu, false);
+		}
+		else {
+			double choixCpu = Math.floor(Math.random()*4); // [0, 1, 2, 3] 
+			
+			if(choixCpu == 0 && !cpu.outOfMana())
+				cpu.seSoigner();
+			else
+				cpu.attaquer(cpu, false);
+		}
 	}
 }
